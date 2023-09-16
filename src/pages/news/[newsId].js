@@ -61,23 +61,38 @@ NewsDetails.getLayout = function getLayout(page){
     return <RootLayout>{page}</RootLayout>
 }
 
-// befor hit the url all news router going the SSG position 
-export const getStaticPaths = async() => {
-    const res = await fetch("http://localhost:5000/news")
-    const allNews = await res.json()
+// befor hit the url all news router are free generate using getStaticPaths
+// export const getStaticPaths = async() => {
+//     const res = await fetch("http://localhost:5000/news")
+//     const allNews = await res.json()
 
-    const paths = allNews.map((news) => ({
-        params: {newsId: (news.id).toString()}
-    }));
+//     const paths = allNews.map((news) => ({
+//         params: {newsId: (news.id).toString()}
+//     }));
 
-    return {paths, fallback: false};
-} 
+//     return {paths, fallback: false};
+// } 
 
-export const getStaticProps = async(context) => {
+// export const getStaticProps = async(context) => {
+//     const {params} = context
+//     const res = await fetch(`http://localhost:5000/news/${params.newsId}`)
+//     const data = await res.json();
+//     // console.log("data result", data);
+
+//     return {
+//         props: {
+//             news: data,
+//         }
+//     };
+// };
+
+// use SSR method getServerSideProps it's SEO also give some facility
+
+export const getServerSideProps = async(context) => {
     const {params} = context
     const res = await fetch(`http://localhost:5000/news/${params.newsId}`)
     const data = await res.json();
-    console.log("data result", data);
+    // console.log("data result", data);
 
     return {
         props: {

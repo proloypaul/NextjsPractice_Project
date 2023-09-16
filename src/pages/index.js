@@ -27,11 +27,20 @@ HomePage.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
-// fetch all new data using SSG 
+// fetch all news data using SSG getStaticProps method 
 
-export const getStaticProps = async() => {
+// export const getStaticProps = async() => {
+//   const res = await fetch("http://localhost:5000/news")
+//   const dataOfNews = await res.json()
+//   // console.log("data of news",dataOfNews)
+//   return {props: {allNewsData: dataOfNews}, revalidate: 30}
+// }
+
+// fetch all news data using SSR
+
+export const getServerSideProps = async() => {
   const res = await fetch("http://localhost:5000/news")
   const dataOfNews = await res.json()
   // console.log("data of news",dataOfNews)
-  return {props: {allNewsData: dataOfNews}, revalidate: 30}
+  return {props: {allNewsData: dataOfNews}}
 }
