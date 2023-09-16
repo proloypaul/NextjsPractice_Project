@@ -27,6 +27,7 @@ const NotFoundPage = () => {
         src={ErrorImg}
         width={700}
         alt="error_image"
+        reponsive
         style={{ display: "flex", margin: "50px auto" }}
       />
       <Link href="/">
