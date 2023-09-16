@@ -33,5 +33,5 @@ export const getStaticProps = async() => {
   const res = await fetch("http://localhost:5000/news")
   const dataOfNews = await res.json()
   // console.log("data of news",dataOfNews)
-  return {props: {allNewsData: dataOfNews}}
+  return {props: {allNewsData: dataOfNews}, revalidate: 30}
 }

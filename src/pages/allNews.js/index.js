@@ -1,7 +1,8 @@
 import RootLayout from '@/components/Layouts/RootLayout';
-import { CalendarOutlined, ProfileOutlined, CommentOutlined } from '@ant-design/icons';
-import { Avatar, Card, Col, Row } from 'antd';
+import { CalendarOutlined, ProfileOutlined, CommentOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import { Card, Col, Row } from 'antd';
 import Image from 'next/image';
+import Link from 'next/link';
 const { Meta } = Card;
 
 const AllNews = ({allNewsData}) => {
@@ -12,15 +13,11 @@ const AllNews = ({allNewsData}) => {
                 {allNewsData?.map((news) => (
                     <Col key={news.id} className="gutter-row" span={6}>
                         <Card
-                            style={{
-                                width: 300
-
-                            }}
+                            hoverable
                             cover={
                                 <Image
                                 src={news?.image_url}
                                 alt='Empty'
-                                responsive
                                 width="300"
                                 height="300"
                                 />
@@ -37,6 +34,24 @@ const AllNews = ({allNewsData}) => {
                                 ? news?.description.slice(0, 70) + "..."
                                 : news?.description}
                             />
+
+                            <Link href={`/news/${news?.id}`}>
+                                <p
+                                style={{
+                                    fontSize: "15px",
+                                    marginTop: "20px",
+                                    backgroundColor: "black",
+                                    color: "white",
+                                    width: "100%",
+                                    padding: "2px 5px ",
+                                    fontWeight: "300",
+                                    letterSpacing: "3px",
+                                    textAlign: "center",
+                                }}
+                                >
+                                Keep Reading <ArrowRightOutlined />
+                                </p>
+                        </Link>
                         </Card>
                     </Col>
                 ))}
