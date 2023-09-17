@@ -48,7 +48,7 @@ HomePage.getLayout = function getLayout(page) {
 // fetch all news data using SSR
 
 export const getServerSideProps = async() => {
-  const res = await fetch("http://localhost:5000/news")
+  const res = await fetch("http://localhost:3000/api/news")
   const dataOfNews = await res.json()
   // console.log("data of news",dataOfNews)
   return {props: {allNewsData: dataOfNews}}

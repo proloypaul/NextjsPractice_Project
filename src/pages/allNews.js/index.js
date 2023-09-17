@@ -12,12 +12,12 @@ const AllNews = () => {
     
     // client side rendering using Redux
     const {data, isLoading, isError, error} = useGetNewsQuery()
-    console.log(data)
+    // console.log("Data comming from RTK query", data?.data)
     
     return (
         <div style={{padding: "50px"}}>
             {isLoading? <h1>Loading.....</h1>:  <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                {data?.map((news) => (
+                {data?.data?.map((news) => (
                     <Col key={news.id} className="gutter-row" span={6}>
                         <Card
                             hoverable
