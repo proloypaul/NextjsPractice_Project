@@ -1,10 +1,19 @@
 import Head from "next/head";
 import RootLayout from "@/components/Layouts/RootLayout";
-import Banner from "@/components/UI/Banner";
+// import Banner from "@/components/UI/Banner";
 import AllNews from "./allNews.js";
+import dynamic from 'next/dynamic'
 
 
 const HomePage = ({allNewsData}) => {
+
+  // lazy loading banner section
+  const DynamicBanner = dynamic(() => import("@/components/UI/Banner"), {
+    loading: () => <h1 style={{height: "100vh", width: "100%", display: "flex", justifyContent:"center", alignItems:"center"}}>Loading...</h1>,
+    // also skip Server Side Rendering
+    ssr: false,
+  })
+
   return (
     <>
       <Head>
@@ -16,7 +25,7 @@ const HomePage = ({allNewsData}) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Banner />
+      <DynamicBanner/>
       <AllNews allNewsData={allNewsData}/>
     </>
   );
