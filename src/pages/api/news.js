@@ -24,6 +24,15 @@ async function run(req, res) {
         const news = await newsCollection.find({}).toArray()
         res.send({message: "success", status: 200, data: news})
     }
+
+    if(req.method == "POST"){
+        const newsData = req.body;
+        
+        const result = await newsCollection.insertOne(newsData)
+
+        res.json(result)
+    }
+
     
     
   } finally {

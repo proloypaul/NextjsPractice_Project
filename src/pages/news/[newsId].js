@@ -90,7 +90,7 @@ NewsDetails.getLayout = function getLayout(page){
 
 export const getServerSideProps = async(context) => {
     const {params} = context
-    const res = await fetch(`http://localhost:5000/news/${params.newsId}`)
+    const res = await fetch(`http://localhost:5000/api/news/${params.newsId}`)
     const data = await res.json();
     // console.log("data result", data);
 
