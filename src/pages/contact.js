@@ -2,8 +2,13 @@ import { Button } from "antd";
 import Link from "next/link";
 import Head from "next/head";
 import RootLayout from "@/components/Layouts/RootLayout";
+// import { useGetNewsQuery } from "@/redux/features/api/apiSlice";
 
 const ContactPage = () => {
+
+  // const {data, isLoading, isError, error} = useGetNewsQuery()
+  // console.log(data)
+
   return (
     <div
       style={{
