@@ -2,6 +2,7 @@ import RootLayout from '@/components/Layouts/RootLayout';
 import { LockOutlined, UserOutlined, GoogleOutlined, GithubOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import style from '@/styles/Home.module.css'
+import { signIn } from 'next-auth/react';
 
 const LoginFrom = () => {
     const onFinish = (values) => {
@@ -64,8 +65,12 @@ const LoginFrom = () => {
                         </Form.Item>
                     </Form>
                     <div className={style.login_iconsDesign}>
-                        <GithubOutlined/>
-                        <GoogleOutlined/>
+                        <GithubOutlined onClick={() => signIn("github", {
+                            callbackUrl: "/"
+                        })} style={{cursor: "pointer"}}/>
+                        <GoogleOutlined onClick={() => signIn("google", {
+                            callbackUrl: "/"
+                        })} style={{cursor: "pointer"}}/>
                     </div>
                 </div>
             </div>

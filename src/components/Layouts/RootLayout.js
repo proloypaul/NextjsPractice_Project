@@ -6,14 +6,20 @@ import {
   LinkedinFilled,
   GoogleSquareFilled,
   TwitterSquareFilled,
-  LoginOutlined
+  LoginOutlined,
+  LogoutOutlined
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 const { Header, Content, Footer } = Layout;
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react"
+
 
 const RootLayout = ({ children }) => {
+  const {data: session} = useSession()
+
+  // console.log("login user data: ", session)
   return (
     <Layout>
       <Header
@@ -60,16 +66,27 @@ const RootLayout = ({ children }) => {
               Contact Us
             </items>
           </Link>
-          <Link href="/login">
+          {session?.user?.email?
+            <Link href="/login" onClick={() => signOut()}>
+              <items
+                style={{
+                  margin: "0px 25px",
+                }}
+              >
+                <LogoutOutlined />
+                LogOut
+              </items>
+            </Link>: <Link href="/login">
             <items
               style={{
                 margin: "0px 25px",
               }}
             >
               <LoginOutlined />
-              Login
+              LogIn
             </items>
           </Link>
+          }
         </Menu>
       </Header>
 
