@@ -6,6 +6,7 @@ import {
   LinkedinFilled,
   GoogleSquareFilled,
   TwitterSquareFilled,
+  LoginOutlined
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 const { Header, Content, Footer } = Layout;
@@ -57,6 +58,16 @@ const RootLayout = ({ children }) => {
             <items>
               <MobileOutlined />
               Contact Us
+            </items>
+          </Link>
+          <Link href="/login">
+            <items
+              style={{
+                margin: "0px 25px",
+              }}
+            >
+              <LoginOutlined />
+              Login
             </items>
           </Link>
         </Menu>
