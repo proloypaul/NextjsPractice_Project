@@ -7,9 +7,16 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getNews: builder.query({
         query: () => "/news"
+    }),
+    postNews: builder.mutation({
+      query: ({data}) => ({
+        url: "/news",
+        method: 'POST',
+        body: data
+      })
     })
   }),
 })
 
 // auto-generated based on the defined endpoints
-export const {useGetNewsQuery} = apiSlice
+export const {useGetNewsQuery, usePostNewsMutation} = apiSlice

@@ -19,16 +19,20 @@ async function run(req, res) {
     // res.send({message: "successfully connected to MongoDB!"});    
     const newsDatabase = await client.db("newsPortalPractice")
     const newsCollection = newsDatabase.collection("news")
+    const postedNewsCollection = newsDatabase.collection("postedNews")
 
     if(req.method == "GET"){
         const news = await newsCollection.find({}).toArray()
-        res.send({message: "success", status: 200, data: news})
+        const postedNews = await postedNewsCollection.find({}).toArray()
+
+        res.send({message: "success", status: 200, data: news, postedData: postedNews})
+
     }
 
     if(req.method == "POST"){
         const newsData = req.body;
-        
-        const result = await newsCollection.insertOne(newsData)
+        console.log("newsData come from client", newsData)
+        const result = await postedNewsCollection.insertOne(newsData)
 
         res.json(result)
     }
