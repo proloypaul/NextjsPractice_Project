@@ -1,9 +1,13 @@
 import Link from "next/link";
 import Head from "next/head";
 import RootLayout from "@/components/Layouts/RootLayout";
-import { Button, Form, Input, Spin } from 'antd';
+import { Button, Col, Form, Input, Row, Spin } from 'antd';
 // import { useEffect, useState } from "react";
-import { usePostNewsMutation } from "@/redux/features/api/apiSlice";
+import { useGetNewsQuery, usePostNewsMutation } from "@/redux/features/api/apiSlice";
+import { Card } from 'antd';
+import Image from "next/image";
+
+const { Meta } = Card;
 
 
 const formItemLayout = {
@@ -27,6 +31,14 @@ const formTailLayout = {
 
 const ContactPage = () => {
   const [form] = Form.useForm();
+  // get postedNews using redux 
+  const {data, isLoading:getNewLoad, isError:getNewError, error} = useGetNewsQuery()
+
+  // after posted single data refetchOnMountOrArgChange help us to display data 
+  // const {data, isLoading:getNewLoad, isError:getNewError, error} = useGetNewsQuery(id,{refetchOnMountOrArgChange: true, pollingInterval: 30000})
+
+  // console.log("posted data", data.postedData)
+  // post data using redux 
   const [postNews, {isLoading, isError, isSuccess}] = usePostNewsMutation()
   const onCheck = async () => {
     try {
@@ -104,9 +116,24 @@ const ContactPage = () => {
       </Form.Item>
       </Form>
       </div>
-      <Link href="/">
-        <Button>Back To Home</Button>
-      </Link>
+      <div>
+        <Link href="/">
+          <Button>Back To Home</Button>
+        </Link>
+      </div>
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} style={{paddingTop:"50px"}}>
+        {data?.postedData?.map((news) =>(
+          <Col key={news._id} span={6}>
+            <Card
+            hoverable
+            // style={{ width: 240 }}
+            cover={<Image src={news?.img} alt="Empty!" width={300} height={300}/>}
+            >
+              <Meta title={news.title} description={news.description}/>
+            </Card>
+            </Col>
+        ))}
+      </Row>
     </div>
   );
 };
